@@ -17,3 +17,4 @@
 - Update playlist metadata to show total blog count and total word count.
 - Change "Play" button to link to LinkedIn profile.
 - Correct dates in "First Blog Post" content (Tuesday/Thursday).
+- Update "First Blog Post" date to 01/22/2026.
