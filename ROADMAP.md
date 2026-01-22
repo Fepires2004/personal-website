@@ -1,0 +1,18 @@
+# Roadmap
+
+- Replace placeholder artwork with `Bertram_Gilfoyle.png` in player UI.
+- Rename "Spotify" title to "IDS2141" in Sidebar.
+- Rename "Daily Mix 1" playlist title to "Fernando De Abreu Pires" in MainContent.
+- Change "PLAYLIST" label to "Blog" in MainContent.
+- Implement pop-up modal to display blog post content when clicking on titles in MainContent.
+- Change "ALBUM" column header to "DATE" in MainContent.
+- Add "vibecoded" alert popup when clicking anywhere in the Sidebar.
+- Format blog post content with paragraph breaks.
+- Use `IMG_4064_fixed.png` for the "First Blog Post" thumbnail and modal cover.
+- Dynamically calculate and display word count for each blog post in the table.
+- Remove Next.js development indicator/logo.
+- Remove temporary placeholder blog posts (items 2-5).
+- Sync "Now Playing" footer with the latest blog post data.
+- Make footer "Now Playing" area clickable to open the latest blog post modal.
+- Update playlist metadata to show total blog count and total word count.
+- Change "Play" button to link to LinkedIn profile.
