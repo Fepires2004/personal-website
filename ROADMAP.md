@@ -16,3 +16,4 @@
 - Make footer "Now Playing" area clickable to open the latest blog post modal.
 - Update playlist metadata to show total blog count and total word count.
 - Change "Play" button to link to LinkedIn profile.
+- Correct dates in "First Blog Post" content (Tuesday/Thursday).
