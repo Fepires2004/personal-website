@@ -84,40 +84,43 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
 
       {selectedPost && (
         <div 
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedPost(null)}
         >
           <div 
-            className="bg-[#282828] text-white p-8 rounded-lg max-w-2xl w-full relative shadow-2xl"
+            className="bg-[#282828] text-white p-6 md:p-10 rounded-xl w-full max-w-4xl max-h-[90vh] relative shadow-2xl flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             <button 
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-20 p-2 hover:bg-white/10 rounded-full"
               onClick={() => setSelectedPost(null)}
+              aria-label="Close modal"
             >
               <X size={24} />
             </button>
-            <div className="flex items-start space-x-6 mb-6">
-              <Image
-                src={selectedPost.image}
-                width={120}
-                height={120}
-                alt={selectedPost.title}
-                className="shadow-lg rounded"
-              />
-              <div>
-                <h2 className="text-3xl font-bold mb-2">{selectedPost.title}</h2>
-                <p className="text-gray-400">{selectedPost.artist} • {selectedPost.album}</p>
+            <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 mb-8 shrink-0">
+              <div className="relative w-32 h-32 sm:w-48 sm:h-48 shrink-0 shadow-2xl">
+                <Image
+                  src={selectedPost.image}
+                  fill
+                  alt={selectedPost.title}
+                  className="object-cover rounded-md"
+                />
+              </div>
+              <div className="text-center sm:text-left">
+                <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-400 mb-1">Blog Post</p>
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-2 leading-tight">{selectedPost.title}</h2>
+                <p className="text-gray-300 text-sm sm:text-base font-medium">{selectedPost.artist} • {selectedPost.album}</p>
               </div>
             </div>
-            <div className="border-t border-gray-700 pt-6">
-              <p className="text-lg leading-relaxed text-gray-200 whitespace-pre-wrap">
+            <div className="border-t border-gray-700/50 pt-8 overflow-y-auto flex-1 custom-scrollbar">
+              <p className="text-base sm:text-lg leading-relaxed text-gray-300 whitespace-pre-wrap font-light">
                 {selectedPost.content}
               </p>
             </div>
-            <div className="mt-8 flex justify-end">
+            <div className="mt-6 flex justify-end shrink-0">
               <button 
-                className="bg-white text-black font-bold py-2 px-6 rounded-full hover:scale-105 transition"
+                className="bg-white text-black font-bold py-3 px-10 rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg"
                 onClick={() => setSelectedPost(null)}
               >
                 Close
