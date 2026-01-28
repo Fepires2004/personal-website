@@ -18,3 +18,4 @@
 - Change "Play" button to link to LinkedIn profile.
 - Correct dates in "First Blog Post" content (Tuesday/Thursday).
 - Update "First Blog Post" date to 01/22/2026.
+- Ensure blog post images are fully visible in the modal (no cropping).

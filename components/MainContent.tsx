@@ -104,7 +104,7 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
                   src={selectedPost.image}
                   fill
                   alt={selectedPost.title}
-                  className="object-cover rounded-md"
+                  className="object-contain rounded-md"
                 />
               </div>
               <div className="text-center sm:text-left">

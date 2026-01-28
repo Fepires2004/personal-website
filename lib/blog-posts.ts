@@ -1,11 +1,11 @@
 export const blogPosts = [
   { 
-    title: "Innovation and Emerging Technologies", 
+    title: "App Development", 
     artist: "Fernando", 
     album: "01/27/2026", 
     duration: "X Words",
     image: "/Screenshot 2026-01-27 at 6.03.35 PM.png",
-    content: "Exciting times at the Innovation Hub! Today we had a very special guest mentioned in the community. Satya Nadella, Chairman and CEO at Microsoft, shared his excitement about being a speaker for our Innovation and Emerging Technologies class at Florida State University.\n\nIt's incredible to see such high-level industry leaders engaging with our curriculum and the Innovation Hub. This really highlights the importance of the technologies we're studying and the impact they have on the future of the industry."
+    content: "For this week's blog post, I built an iOS app on Expo Go, using React Native and Typescript. It's a very simple app that's just meant to simulate the LinkedIn user experience.\n\nI have started by populating it with funny posts, as you can see we'll be having Microsoft's CEO, Satya Nadella as a guest speaker next class! I want to further work on it as a comedy platform, using an LLM API to generate a funny post everytime I load the app."
   },
   { 
     title: "First Blog Post", 
