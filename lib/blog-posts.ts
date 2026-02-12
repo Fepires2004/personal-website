@@ -2,9 +2,9 @@ export const blogPosts = [
   { 
     title: "Teamwork", 
     artist: "Fernando", 
-    album: "01/27/2026", 
+    album: "02/11/2026", 
     duration: "X Words",
-    image: "/window.svg",
+    image: "/IMG_4157.PNG",
     content: "Throughout this project my group and I discussed ideas of what to make for our project, and we came to the conclusion that since we're begginers we should do a simple game, like snake. Using Cursor and Android Studio we were able to develop a game with three screens, that lets you play with a D-pad.\n\nWe worked together in deciding small but nice features to add, for example, the snake changes color each time it gets a point, or adding a countdown before the game actually starts."
   },
   { 
