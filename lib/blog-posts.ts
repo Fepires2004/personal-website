@@ -5,7 +5,7 @@ export const blogPosts = [
     album: "02/11/2026", 
     duration: "X Words",
     image: "/IMG_4157.PNG",
-    content: "Throughout this project my group and I discussed ideas of what to make for our project, and we came to the conclusion that since we're begginers we should do a simple game, like snake. Using Cursor and Android Studio we were able to develop a game with three screens, that lets you play with a D-pad.\n\nWe worked together in deciding small but nice features to add, for example, the snake changes color each time it gets a point, or adding a countdown before the game actually starts."
+    content: "Throughout this project my group and I discussed ideas of what to make for our project, and we came to the conclusion that since we're begginers we should do a simple game, like snake. Using Cursor and Android Studio we were able to develop a game with three screens, that lets you play with a D-pad.\n\nWe worked together in deciding small but nice features to add, for example, the snake changes color each time it gets a point, adding a countdown before the game actually starts, or even shaking your phone to restart playing the game.\n\nOverall, I had a great time working with my group in this project as I would never be creative enough to think of some of the features we implemented."
   },
   { 
     title: "App Development", 
