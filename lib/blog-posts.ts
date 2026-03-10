@@ -1,4 +1,23 @@
-export const blogPosts = [
+export interface BlogPost {
+  title: string
+  artist: string
+  album: string
+  duration: string
+  image: string
+  images?: string[]
+  content: string
+}
+
+export const blogPosts: BlogPost[] = [
+  { 
+    title: "3D Modeling", 
+    artist: "Fernando", 
+    album: "03/10/2026", 
+    duration: "X Words",
+    image: "/3d-modeling-logo.png",
+    images: ["/3d-modeling-1.png", "/3d-modeling-2.png", "/3d-modeling-3.png", "/3d-modeling-4.png", "/3d-modeling-5.png", "/3d-modeling-6.png", "/3d-modeling-7.png", "/3d-modeling-8.png", "/3d-modeling-9.png"],
+    content: "I had fun working on these models, especially during the aviators as they were very challenging. I hadn’t used any CAD software since freshman year of high school so it was cool to work on it again.\n\nPVC: Two cylinders against each other hollowed out.\n\nEgg: Two half circles hollowed, with one longer than the other.\n\nFlash Drive: Blue square with one white rectangle on each side representing the sticker, and one gray rectangle on each side with a hollowed-out rectangle. I struggled a bit with the circle in the middle, but used a flattened sphere to hollow it out and fill it with a gray circle.\n\nChopstick: I elongated a paraboloid, hollowed out the top by using a square, then copied and pasted it to make the second one.\n\nFlask: I grouped a sphere, cone, and cylinder together, as well as filling it with a smaller copy of the actual flask on the inside to make the red liquid. I made sure the flask was transparent so that the liquid is visible.\n\nBowler Hat: I used a shortened cylinder with a half circle on top, surrounded by a flattened torus and a curved ring for the brim. I made a copy of it and made it smaller to hollow out the inside.\n\nAviator: I made long rectangles for the handles and skinnier cubes for the lens, then cut them up with rotated cubes to make them look more circular. I used an extrude sketch to make my own piece for the gel holder, then a transparent paraboloid for the gel. In the middle of both lenses, I used a flattened rectangle and a round roof."
+  },
   { 
     title: "Teamwork", 
     artist: "Fernando", 

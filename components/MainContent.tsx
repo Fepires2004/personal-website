@@ -1,20 +1,45 @@
 "use client"
 
-import { Play, X } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
+import { ChevronLeft, ChevronRight, Play, X } from "lucide-react"
 import Image from "next/image"
-import { blogPosts } from "@/lib/blog-posts"
+import { blogPosts, type BlogPost } from "@/lib/blog-posts"
 
 interface MainContentProps {
-  selectedPost: typeof blogPosts[0] | null
-  setSelectedPost: (post: typeof blogPosts[0] | null) => void
+  selectedPost: BlogPost | null
+  setSelectedPost: (post: BlogPost | null) => void
 }
 
 export function MainContent({ selectedPost, setSelectedPost }: MainContentProps) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
   const getWordCount = (text: string) => {
     return text.trim().split(/\s+/).filter(word => word.length > 0).length
   }
 
   const totalWords = blogPosts.reduce((acc, post) => acc + getWordCount(post.content), 0)
+  const selectedPostImages = useMemo(() => {
+    if (!selectedPost) {
+      return []
+    }
+
+    return selectedPost.images?.length ? selectedPost.images : [selectedPost.image]
+  }, [selectedPost])
+
+  useEffect(() => {
+    setCurrentImageIndex(0)
+  }, [selectedPost])
+
+  const showImageNavigation = selectedPostImages.length > 1
+  const currentModalImage = selectedPostImages[currentImageIndex] ?? selectedPost?.image
+
+  const goToPreviousImage = () => {
+    setCurrentImageIndex((index) => (index === 0 ? selectedPostImages.length - 1 : index - 1))
+  }
+
+  const goToNextImage = () => {
+    setCurrentImageIndex((index) => (index === selectedPostImages.length - 1 ? 0 : index + 1))
+  }
 
   return (
     <div className="flex-1 bg-gradient-to-b from-blue-900 to-black text-white p-8 overflow-y-auto relative">
@@ -99,13 +124,38 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
               <X size={24} />
             </button>
             <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 mb-8 shrink-0">
-              <div className="relative w-32 h-32 sm:w-48 sm:h-48 shrink-0 shadow-2xl">
+              <div className="flex flex-col items-center gap-3 shrink-0">
+                <div className="relative w-32 h-32 sm:w-48 sm:h-48 shrink-0 shadow-2xl">
                 <Image
-                  src={selectedPost.image}
+                  src={currentModalImage}
                   fill
                   alt={selectedPost.title}
                   className="object-contain rounded-md"
                 />
+                </div>
+                {showImageNavigation && (
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+                      onClick={goToPreviousImage}
+                      aria-label="Show previous image"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <span className="min-w-12 text-center text-xs font-medium text-gray-300">
+                      {currentImageIndex + 1} / {selectedPostImages.length}
+                    </span>
+                    <button
+                      type="button"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+                      onClick={goToNextImage}
+                      aria-label="Show next image"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="text-center sm:text-left">
                 <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-400 mb-1">Blog Post</p>

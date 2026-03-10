@@ -19,3 +19,4 @@
 - Correct dates in "First Blog Post" content (Tuesday/Thursday).
 - Update "First Blog Post" date to 01/22/2026.
 - Ensure blog post images are fully visible in the modal (no cropping).
+- Add support for multi-image blog posts with next/previous navigation in the modal.
