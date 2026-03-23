@@ -9,8 +9,17 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
-  { 
-    title: "3D Modeling", 
+  {
+    title: "CAD Assignment",
+    artist: "Fernando",
+    album: "03/23/2026",
+    duration: "X Words",
+    image: "/cad-assignment-1.png",
+    images: ["/cad-assignment-1.png", "/cad-assignment-2.png", "/cad-assignment-3.png", "/cad-assignment-4.png"],
+    content: ""
+  },
+  {
+    title: "3D Modeling",
     artist: "Fernando", 
     album: "03/10/2026", 
     duration: "X Words",
