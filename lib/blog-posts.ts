@@ -15,7 +15,7 @@ export const blogPosts: BlogPost[] = [
     album: "03/23/2026",
     duration: "X Words",
     image: "/cad-assignment-1.png",
-    images: ["/cad-assignment-1.png", "/cad-assignment-2.png", "/cad-assignment-3.png", "/cad-assignment-4.png", "/cad-assignment-5.png"],
+    images: ["/cad-assignment-1.png", "/cad-assignment-2.png", "/cad-assignment-3.png", "/cad-assignment-4.png", "/cad-assignment-5.png", "/cad-assignment-6.png", "/cad-assignment-7.png"],
     content: "For the first object, I followed the tutorial (math version) which was very intuitive, but struggled a little bit as I accidentally forgot to add a line and kept getting a \"wire is not closed\" error when doing the last step, after reviewing the steps again I realized my mistake, fixed it, and looks great!\n\nFor the second object, instead of making a cable manager which clips onto the table, which would be very complicated for a Free CAD beginner like me, I decided to do something simple like a C-shaped holder, which could hang off my desk. It shouldn't move as cables are pushing against it on the way up, however, if one is scared of it falling, simply adding weight on top of it would secure it. One nice addition could be having a wireless charger on top, where your smartphone would be used as weight to keep the platform stable."
   },
   {
