@@ -10,6 +10,15 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "Fusion",
+    artist: "Fernando",
+    album: "04/07/2026",
+    duration: "X Words",
+    image: "/fusion-1.png",
+    images: ["/fusion-1.png", "/fusion-2.png", "/fusion-3.png", "/fusion-4.png", "/fusion-5.png", "/fusion-6.png", "/fusion-7.png"],
+    content: "For the box I simply followed the tutorial so it wasn't that complicated.\n\nFor the lampshade I simply drew a sketch of a lampshade I have back home, very simple design and very simply implemented it on Fusion.\n\nFor the flask, we built it in class, the one thing I struggled with was making the beak, therefore I left it the same way I did it for the TinkerCAD one, a more curbed beak.\n\nFor the bowler hat, I struggled with getting the oval shape instead of a spherical one, but besides that, the hat has a curved brim as well as a round top (unlike a Top Hat)."
+  },
+  {
     title: "CAD Assignment",
     artist: "Fernando",
     album: "03/23/2026",
