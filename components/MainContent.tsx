@@ -143,12 +143,13 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
             <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 mb-8 shrink-0">
               <div className="flex flex-col items-center gap-3 shrink-0">
                 {selectedPost.video ? (
-                  <div className="relative w-48 h-48 sm:w-64 sm:h-64 shrink-0 shadow-2xl rounded-md overflow-hidden">
+                  <div className="relative w-48 sm:w-64 aspect-[9/16] shrink-0 shadow-2xl rounded-md overflow-hidden bg-black">
                     <video
                       ref={videoRef}
                       src={selectedPost.video}
                       className="w-full h-full object-contain rounded-md"
                       playsInline
+                      preload="metadata"
                       onEnded={() => setIsVideoPlaying(false)}
                     />
                     <button
@@ -160,8 +161,11 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
                             videoRef.current.pause()
                             setIsVideoPlaying(false)
                           } else {
-                            videoRef.current.play()
-                            setIsVideoPlaying(true)
+                            videoRef.current.play().then(() => {
+                              setIsVideoPlaying(true)
+                            }).catch(() => {
+                              setIsVideoPlaying(false)
+                            })
                           }
                         }
                       }}
