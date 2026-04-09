@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
-import { ChevronLeft, ChevronRight, Play, Pause, Video, X } from "lucide-react"
+import { useEffect, useMemo, useState } from "react"
+import { ChevronLeft, ChevronRight, Play, Video, X } from "lucide-react"
 import Image from "next/image"
 import { blogPosts, type BlogPost } from "@/lib/blog-posts"
 
@@ -30,19 +30,8 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
     setCurrentImageIndex(0)
   }, [selectedPost])
 
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
   const showImageNavigation = selectedPostImages.length > 1
   const currentModalImage = selectedPostImages[currentImageIndex] ?? selectedPost?.image
-
-  useEffect(() => {
-    setIsVideoPlaying(false)
-    if (videoRef.current) {
-      videoRef.current.pause()
-      videoRef.current.currentTime = 0
-    }
-  }, [selectedPost])
 
   const goToPreviousImage = () => {
     setCurrentImageIndex((index) => (index === 0 ? selectedPostImages.length - 1 : index - 1))
@@ -143,40 +132,14 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
             <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 mb-8 shrink-0">
               <div className="flex flex-col items-center gap-3 shrink-0">
                 {selectedPost.video ? (
-                  <div className="relative w-48 sm:w-64 aspect-[9/16] shrink-0 shadow-2xl rounded-md overflow-hidden bg-black">
+                  <div className="w-48 sm:w-64 shrink-0 shadow-2xl rounded-md overflow-hidden bg-black">
                     <video
-                      ref={videoRef}
                       src={selectedPost.video}
-                      className="w-full h-full object-contain rounded-md"
+                      className="w-full rounded-md"
+                      controls
                       playsInline
                       preload="metadata"
-                      onEnded={() => setIsVideoPlaying(false)}
                     />
-                    <button
-                      type="button"
-                      className={`absolute inset-0 flex items-center justify-center transition-opacity ${isVideoPlaying ? "opacity-0 hover:opacity-100 bg-black/20" : "bg-black/40 hover:bg-black/30"}`}
-                      onClick={() => {
-                        if (videoRef.current) {
-                          if (isVideoPlaying) {
-                            videoRef.current.pause()
-                            setIsVideoPlaying(false)
-                          } else {
-                            videoRef.current.play().then(() => {
-                              setIsVideoPlaying(true)
-                            }).catch(() => {
-                              setIsVideoPlaying(false)
-                            })
-                          }
-                        }
-                      }}
-                      aria-label={isVideoPlaying ? "Pause video" : "Play video"}
-                    >
-                      {isVideoPlaying ? (
-                        <Pause size={40} className="text-white drop-shadow-lg" />
-                      ) : (
-                        <Play size={40} fill="white" className="text-white drop-shadow-lg" />
-                      )}
-                    </button>
                   </div>
                 ) : (
                   <>
