@@ -1,4 +1,4 @@
-import { Play, SkipBack, SkipForward, Repeat, Shuffle, Volume2 } from "lucide-react"
+import { Play, SkipBack, SkipForward, Repeat, Shuffle, Video, Volume2 } from "lucide-react"
 import Image from "next/image"
 import { blogPosts } from "@/lib/blog-posts"
 
@@ -15,13 +15,19 @@ export function PlayerControls({ setSelectedPost }: PlayerControlsProps) {
         className="flex items-center space-x-4 cursor-pointer hover:opacity-80 transition group"
         onClick={() => setSelectedPost(latestPost)}
       >
-        <Image
-          src={latestPost.image}
-          width={56}
-          height={56}
-          alt="Now playing"
-          className="w-14 h-14 rounded"
-        />
+        {latestPost.video ? (
+          <div className="w-14 h-14 rounded bg-white/10 flex items-center justify-center shrink-0">
+            <Video size={24} className="text-gray-300" />
+          </div>
+        ) : (
+          <Image
+            src={latestPost.image}
+            width={56}
+            height={56}
+            alt="Now playing"
+            className="w-14 h-14 rounded"
+          />
+        )}
         <div>
           <p className="font-semibold group-hover:underline">{latestPost.title}</p>
           <p className="text-sm text-gray-400">{latestPost.artist}</p>

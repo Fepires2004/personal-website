@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
-import { ChevronLeft, ChevronRight, Play, X } from "lucide-react"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { ChevronLeft, ChevronRight, Play, Pause, Video, X } from "lucide-react"
 import Image from "next/image"
 import { blogPosts, type BlogPost } from "@/lib/blog-posts"
 
@@ -30,8 +30,19 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
     setCurrentImageIndex(0)
   }, [selectedPost])
 
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
   const showImageNavigation = selectedPostImages.length > 1
   const currentModalImage = selectedPostImages[currentImageIndex] ?? selectedPost?.image
+
+  useEffect(() => {
+    setIsVideoPlaying(false)
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+  }, [selectedPost])
 
   const goToPreviousImage = () => {
     setCurrentImageIndex((index) => (index === 0 ? selectedPostImages.length - 1 : index - 1))
@@ -87,13 +98,19 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
               <td className="py-3">{index + 1}</td>
               <td className="py-3">
                 <div className="flex items-center">
-                  <Image
-                    src={song.image}
-                    width={40}
-                    height={40}
-                    alt={`${song.title} cover`}
-                    className="mr-3"
-                  />
+                  {song.video ? (
+                    <div className="w-10 h-10 mr-3 bg-white/10 rounded flex items-center justify-center shrink-0">
+                      <Video size={20} className="text-gray-300" />
+                    </div>
+                  ) : (
+                    <Image
+                      src={song.image}
+                      width={40}
+                      height={40}
+                      alt={`${song.title} cover`}
+                      className="mr-3"
+                    />
+                  )}
                   <div>
                     <p className="text-white group-hover:underline">{song.title}</p>
                     <p>{song.artist}</p>
@@ -125,36 +142,72 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
             </button>
             <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 mb-8 shrink-0">
               <div className="flex flex-col items-center gap-3 shrink-0">
-                <div className="relative w-32 h-32 sm:w-48 sm:h-48 shrink-0 shadow-2xl">
-                <Image
-                  src={currentModalImage}
-                  fill
-                  alt={selectedPost.title}
-                  className="object-contain rounded-md"
-                />
-                </div>
-                {showImageNavigation && (
-                  <div className="flex items-center gap-3">
+                {selectedPost.video ? (
+                  <div className="relative w-48 h-48 sm:w-64 sm:h-64 shrink-0 shadow-2xl rounded-md overflow-hidden">
+                    <video
+                      ref={videoRef}
+                      src={selectedPost.video}
+                      className="w-full h-full object-contain rounded-md"
+                      playsInline
+                      onEnded={() => setIsVideoPlaying(false)}
+                    />
                     <button
                       type="button"
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-                      onClick={goToPreviousImage}
-                      aria-label="Show previous image"
+                      className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/30 transition-colors"
+                      onClick={() => {
+                        if (videoRef.current) {
+                          if (isVideoPlaying) {
+                            videoRef.current.pause()
+                            setIsVideoPlaying(false)
+                          } else {
+                            videoRef.current.play()
+                            setIsVideoPlaying(true)
+                          }
+                        }
+                      }}
+                      aria-label={isVideoPlaying ? "Pause video" : "Play video"}
                     >
-                      <ChevronLeft size={18} />
-                    </button>
-                    <span className="min-w-12 text-center text-xs font-medium text-gray-300">
-                      {currentImageIndex + 1} / {selectedPostImages.length}
-                    </span>
-                    <button
-                      type="button"
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-                      onClick={goToNextImage}
-                      aria-label="Show next image"
-                    >
-                      <ChevronRight size={18} />
+                      {isVideoPlaying ? (
+                        <Pause size={40} className="text-white drop-shadow-lg" />
+                      ) : (
+                        <Play size={40} fill="white" className="text-white drop-shadow-lg" />
+                      )}
                     </button>
                   </div>
+                ) : (
+                  <>
+                    <div className="relative w-32 h-32 sm:w-48 sm:h-48 shrink-0 shadow-2xl">
+                      <Image
+                        src={currentModalImage}
+                        fill
+                        alt={selectedPost.title}
+                        className="object-contain rounded-md"
+                      />
+                    </div>
+                    {showImageNavigation && (
+                      <div className="flex items-center gap-3">
+                        <button
+                          type="button"
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+                          onClick={goToPreviousImage}
+                          aria-label="Show previous image"
+                        >
+                          <ChevronLeft size={18} />
+                        </button>
+                        <span className="min-w-12 text-center text-xs font-medium text-gray-300">
+                          {currentImageIndex + 1} / {selectedPostImages.length}
+                        </span>
+                        <button
+                          type="button"
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+                          onClick={goToNextImage}
+                          aria-label="Show next image"
+                        >
+                          <ChevronRight size={18} />
+                        </button>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
               <div className="text-center sm:text-left">

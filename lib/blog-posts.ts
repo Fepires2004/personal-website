@@ -5,10 +5,20 @@ export interface BlogPost {
   duration: string
   image: string
   images?: string[]
+  video?: string
   content: string
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    title: "3D Printing",
+    artist: "Fernando",
+    album: "04/08/2026",
+    duration: "X Words",
+    image: "/IMG_4421.mp4",
+    video: "/IMG_4421.mp4",
+    content: "For the 3D printing project I would like to do an organize for my silverware, as I have some that are too long to fit in, I'd like to add a horizontal part to it at the bottom that would allow for them to fit sideways."
+  },
   {
     title: "Fusion",
     artist: "Fernando",
