@@ -153,7 +153,7 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
                     />
                     <button
                       type="button"
-                      className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/30 transition-colors"
+                      className={`absolute inset-0 flex items-center justify-center transition-opacity ${isVideoPlaying ? "opacity-0 hover:opacity-100 bg-black/20" : "bg-black/40 hover:bg-black/30"}`}
                       onClick={() => {
                         if (videoRef.current) {
                           if (isVideoPlaying) {
