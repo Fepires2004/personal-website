@@ -6,10 +6,20 @@ export interface BlogPost {
   image: string
   images?: string[]
   video?: string
+  audio?: string
   content: string
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    title: "Sound",
+    artist: "Fernando",
+    album: "04/15/2026",
+    duration: "X Words",
+    image: "/SoundAssignment.wav",
+    audio: "/SoundAssignment.wav",
+    content: "For this assignment, I modified my own voice using the distorted effect on Audacity, as well as included two sounds from the internet, one of water running and one of birds chirping."
+  },
   {
     title: "3D Printing",
     artist: "Fernando",

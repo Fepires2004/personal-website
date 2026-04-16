@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { ChevronLeft, ChevronRight, Play, Video, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Music, Play, Video, X } from "lucide-react"
 import Image from "next/image"
 import { blogPosts, type BlogPost } from "@/lib/blog-posts"
 
@@ -87,7 +87,11 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
               <td className="py-3">{index + 1}</td>
               <td className="py-3">
                 <div className="flex items-center">
-                  {song.video ? (
+                  {song.audio ? (
+                    <div className="w-10 h-10 mr-3 bg-white/10 rounded flex items-center justify-center shrink-0">
+                      <Music size={20} className="text-gray-300" />
+                    </div>
+                  ) : song.video ? (
                     <div className="w-10 h-10 mr-3 bg-white/10 rounded flex items-center justify-center shrink-0">
                       <Video size={20} className="text-gray-300" />
                     </div>
@@ -131,7 +135,19 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
             </button>
             <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 mb-8 shrink-0">
               <div className="flex flex-col items-center gap-3 shrink-0">
-                {selectedPost.video ? (
+                {selectedPost.audio ? (
+                  <div className="w-48 sm:w-64 shrink-0 flex flex-col items-center gap-3">
+                    <div className="w-32 h-32 sm:w-48 sm:h-48 bg-white/10 rounded-md flex items-center justify-center shadow-2xl">
+                      <Music size={64} className="text-green-400" />
+                    </div>
+                    <audio
+                      src={selectedPost.audio}
+                      controls
+                      className="w-full"
+                      preload="metadata"
+                    />
+                  </div>
+                ) : selectedPost.video ? (
                   <div className="w-48 sm:w-64 shrink-0 shadow-2xl rounded-md overflow-hidden bg-black">
                     <video
                       src={selectedPost.video}
