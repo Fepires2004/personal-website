@@ -12,7 +12,7 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    title: "Fabricating for a Function Function Part 2",
+    title: "Fabricating for a Function",
     artist: "Fernando",
     album: "04/22/2026",
     duration: "X Words",
