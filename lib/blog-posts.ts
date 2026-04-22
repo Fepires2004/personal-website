@@ -12,6 +12,14 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "Fabricating for a Function Function Part 2",
+    artist: "Fernando",
+    album: "04/22/2026",
+    duration: "X Words",
+    image: "/fabricating-function-part2-cover.png",
+    content: "The hardest part of this wasn't actually on fusion, it was measuring my cabinet without a ruler (which I don't own). I asked an LLM what the dimensions of a Torani vanilla syrup bottle is. After that, I took a picture of the cabinet, with the Torani bottle inside so that the LLM can use it as reference, then proceeded to ask for the dimensions, which was 393 mm x 373 mm.\n\nFor the outer dimensions, it's 388mm x 320mm x 45mm, 2.5mm thick for the wall and 2.0mm thick for the floor. As per the interior dimensions, for the top knife it's 309mm x 100mm, for the main slots it's 75mm x 215 mm, and for the side knife one it's 70 x 315 mm."
+  },
+  {
     title: "Sound",
     artist: "Fernando",
     album: "04/15/2026",
