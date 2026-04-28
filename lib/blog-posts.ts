@@ -12,6 +12,25 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "VR World",
+    artist: "Fernando",
+    album: "04/28/2026",
+    duration: "X Words",
+    image: "/IMG_4493.mp4",
+    video: "/IMG_4493.mp4",
+    images: ["/fullMap.png", "/endPOV.png", "/cSharpAttempt.png"],
+    content: "For the VR world, I decided to make a driving game, where the user controls a car using WASD to either, drive around the spawn island, or drive up the ramp, in which if they fall, they go into the limbo, but if they get to the end, they get fireworks.\n\nOriginally, instead of fireworks, I intended to make a message saying \"You Won!\" pop up after the user goes into the downwards ramp. To make this, I tried using C#, and as Mr. Von Hollen had warned, most students would struggle, I indeed were like most students and struggled. You can see on one of the images the settings I had for the trigger, which failed. This is the reason I resorted to fireworks at the end.\n\nFor the car, I added deacceleration and acceleration noises to make the driving experience more interactive.\n\nFor the sky, I downloaded Fantasy Skybox Free from the asset store (https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353).\n\nAt the end, when actually using the VR, I had some issues rendering some of the packets I had imported, where the staff at the Innovation Hub assisted me in fixing."
+  },
+  {
+    title: "Silverware Organizer",
+    artist: "Fernando",
+    album: "04/27/2026",
+    duration: "X Words",
+    image: "/IMG_4494.mp4",
+    video: "/IMG_4494.mp4",
+    content: "My biggest struggle with printing my silverware organizer was that I didn't remember the size of the 3D printer, therefore my object was simply too big. I ended up cutting it into 6 pieces to make sure its printable, and that eventually led us to our final product. Another struggle I had in the middle of one of my six prints, I got an error (Printer error 1171: The job was canceled locally or failed due to an unknown reason) when my print was around 15% done. Since it seemed like a malfunction, I just printed the same piece later on and it ended up working out!"
+  },
+  {
     title: "Fabricating for a Function",
     artist: "Fernando",
     album: "04/22/2026",

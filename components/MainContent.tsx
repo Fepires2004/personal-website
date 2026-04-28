@@ -10,35 +10,46 @@ interface MainContentProps {
   setSelectedPost: (post: BlogPost | null) => void
 }
 
+type MediaItem = { type: "video" | "image"; src: string }
+
 export function MainContent({ selectedPost, setSelectedPost }: MainContentProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0)
 
   const getWordCount = (text: string) => {
     return text.trim().split(/\s+/).filter(word => word.length > 0).length
   }
 
   const totalWords = blogPosts.reduce((acc, post) => acc + getWordCount(post.content), 0)
-  const selectedPostImages = useMemo(() => {
+  const mediaItems = useMemo<MediaItem[]>(() => {
     if (!selectedPost) {
       return []
     }
 
-    return selectedPost.images?.length ? selectedPost.images : [selectedPost.image]
+    const items: MediaItem[] = []
+    if (selectedPost.video) {
+      items.push({ type: "video", src: selectedPost.video })
+    }
+    if (selectedPost.images?.length) {
+      selectedPost.images.forEach((src) => items.push({ type: "image", src }))
+    } else if (!selectedPost.video && !selectedPost.audio) {
+      items.push({ type: "image", src: selectedPost.image })
+    }
+    return items
   }, [selectedPost])
 
   useEffect(() => {
-    setCurrentImageIndex(0)
+    setCurrentMediaIndex(0)
   }, [selectedPost])
 
-  const showImageNavigation = selectedPostImages.length > 1
-  const currentModalImage = selectedPostImages[currentImageIndex] ?? selectedPost?.image
+  const showMediaNavigation = mediaItems.length > 1
+  const currentMedia = mediaItems[currentMediaIndex]
 
-  const goToPreviousImage = () => {
-    setCurrentImageIndex((index) => (index === 0 ? selectedPostImages.length - 1 : index - 1))
+  const goToPreviousMedia = () => {
+    setCurrentMediaIndex((index) => (index === 0 ? mediaItems.length - 1 : index - 1))
   }
 
-  const goToNextImage = () => {
-    setCurrentImageIndex((index) => (index === selectedPostImages.length - 1 ? 0 : index + 1))
+  const goToNextMedia = () => {
+    setCurrentMediaIndex((index) => (index === mediaItems.length - 1 ? 0 : index + 1))
   }
 
   return (
@@ -147,51 +158,58 @@ export function MainContent({ selectedPost, setSelectedPost }: MainContentProps)
                       preload="metadata"
                     />
                   </div>
-                ) : selectedPost.video ? (
-                  <div className="w-48 sm:w-64 shrink-0 shadow-2xl rounded-md overflow-hidden bg-black">
-                    <video
-                      src={selectedPost.video}
-                      className="w-full rounded-md"
-                      controls
-                      playsInline
-                      preload="metadata"
-                    />
-                  </div>
-                ) : (
+                ) : currentMedia ? (
                   <>
-                    <div className="relative w-32 h-32 sm:w-48 sm:h-48 shrink-0 shadow-2xl">
-                      <Image
-                        src={currentModalImage}
-                        fill
-                        alt={selectedPost.title}
-                        className="object-contain rounded-md"
-                      />
-                    </div>
-                    {showImageNavigation && (
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      {showMediaNavigation && (
                         <button
                           type="button"
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-                          onClick={goToPreviousImage}
-                          aria-label="Show previous image"
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 shrink-0"
+                          onClick={goToPreviousMedia}
+                          aria-label="Show previous media"
                         >
                           <ChevronLeft size={18} />
                         </button>
-                        <span className="min-w-12 text-center text-xs font-medium text-gray-300">
-                          {currentImageIndex + 1} / {selectedPostImages.length}
-                        </span>
+                      )}
+                      {currentMedia.type === "video" ? (
+                        <div className="w-48 sm:w-64 shrink-0 shadow-2xl rounded-md overflow-hidden bg-black">
+                          <video
+                            key={currentMedia.src}
+                            src={currentMedia.src}
+                            className="w-full rounded-md"
+                            controls
+                            playsInline
+                            preload="metadata"
+                          />
+                        </div>
+                      ) : (
+                        <div className="relative w-32 h-32 sm:w-48 sm:h-48 shrink-0 shadow-2xl">
+                          <Image
+                            src={currentMedia.src}
+                            fill
+                            alt={selectedPost.title}
+                            className="object-contain rounded-md"
+                          />
+                        </div>
+                      )}
+                      {showMediaNavigation && (
                         <button
                           type="button"
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
-                          onClick={goToNextImage}
-                          aria-label="Show next image"
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 shrink-0"
+                          onClick={goToNextMedia}
+                          aria-label="Show next media"
                         >
                           <ChevronRight size={18} />
                         </button>
-                      </div>
+                      )}
+                    </div>
+                    {showMediaNavigation && (
+                      <span className="min-w-12 text-center text-xs font-medium text-gray-300">
+                        {currentMediaIndex + 1} / {mediaItems.length}
+                      </span>
                     )}
                   </>
-                )}
+                ) : null}
               </div>
               <div className="text-center sm:text-left">
                 <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-400 mb-1">Blog Post</p>
